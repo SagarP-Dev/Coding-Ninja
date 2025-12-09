@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AiOutlineUser, AiOutlineMail, AiOutlineSend } from "react-icons/ai";
-import { FaMapMarkerAlt, FaEnvelope, FaLaptopCode, FaClock, FaHandshake } from "react-icons/fa";
+import { FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -29,8 +29,10 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0b0f19] to-black text-white px-6 py-16">
-
+    <div
+      id="contact"
+      className="min-h-screen bg-gradient-to-b from-[#0b0f19] to-black text-white px-6 py-16"
+    >
       {/* Heading */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
@@ -42,7 +44,7 @@ export default function Contact() {
       </motion.h1>
 
       <p className="text-center text-gray-300 mt-3 mb-10">
-        Let's build something amazing — Drop a message 👇
+        Have an idea, a question, or a project in mind? Let’s talk 👇
       </p>
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
@@ -94,44 +96,42 @@ export default function Contact() {
           <p className="mt-4 text-center text-sm text-gray-300">{result}</p>
         </motion.form>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT INFORMATION */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           className="bg-[#111827]/70 backdrop-blur-lg p-8 rounded-xl border border-gray-700"
         >
-          <h2 className="text-3xl font-bold mb-4">What You Get</h2>
+          <h2 className="text-3xl font-bold mb-4">Why Choose Me?</h2>
 
-          <p className="text-gray-300 mb-6 leading-relaxed">
-            Whether you're looking for a personal portfolio, a professional business website,
-            or a stunning interactive UI — I turn ideas into reality with clean code
-            and modern design.
+          <p className="text-gray-300 mb-6">
+            I focus on delivering high-quality, modern, fast and responsive web
+            experiences. Whether it's a personal site, business platform, or
+            creative idea — I'm ready to bring it to life.
           </p>
 
-          <div className="space-y-5 text-gray-300">
-
-            <p className="flex items-center gap-3">
-              <FaLaptopCode className="text-cyan-400" /> Responsive & Modern Web Design
+          <div className="space-y-3 mb-10">
+            <p className="flex items-center gap-3 text-gray-300">
+              <FaMapMarkerAlt className="text-red-500" /> Bengaluru, India
             </p>
 
-            <p className="flex items-center gap-3">
-              <FaClock className="text-yellow-400" /> Fast Delivery & Smooth Experience
-            </p>
-
-            <p className="flex items-center gap-3">
-              <FaHandshake className="text-green-400" /> Free Consultation & Revisions
-            </p>
-
-            <p className="flex items-center gap-3">
-              <FaMapMarkerAlt className="text-red-500" /> Based in Bengaluru, India
-            </p>
-
-            <p className="flex items-center gap-3">
-              <FaEnvelope className="text-purple-400" /> codingninja127@gmail.com
+            <p className="flex items-center gap-3 text-gray-300">
+              <FaEnvelope className="text-yellow-400" /> codingninja127@gmail.com
             </p>
           </div>
 
+          <div className="border-t border-gray-600 pt-6">
+            <h3 className="font-semibold text-xl text-purple-300 mb-3 flex items-center gap-2">
+              <FaStar /> What You Can Expect:
+            </h3>
+            <ul className="space-y-2 text-gray-300">
+              <li>✔ Fast communication</li>
+              <li>✔ Clean & modern UI</li>
+              <li>✔ High performance websites</li>
+              <li>✔ Friendly collaboration</li>
+            </ul>
+          </div>
         </motion.div>
       </div>
     </div>
