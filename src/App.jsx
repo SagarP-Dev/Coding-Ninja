@@ -6,7 +6,6 @@ import Team from "./components/Team";
 import Contact from "./components/Contact";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 
-
 export default function App() {
   return (
     <>

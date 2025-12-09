@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Slider from "react-slick";
 import Tilt from "react-parallax-tilt";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Team() {
   const members = [
@@ -23,8 +25,7 @@ export default function Team() {
   ];
 
   const [progress, setProgress] = useState(0);
-
-  const autoplaySpeed = 3000; // ms
+  const autoplaySpeed = 3000;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,23 +39,33 @@ export default function Team() {
     dots: false,
     infinite: true,
     autoplay: true,
-    autoplaySpeed,
+    autoplaySpeed: autoplaySpeed,
     speed: 900,
     fade: true,
     arrows: false,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          fade: false,
+          speed: 500,
+        }
+      }
+    ]
   };
 
   return (
     <section
       id="team"
-      className="py-28 px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white"
+      className="py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white"
     >
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center text-5xl sm:text-6xl md:text-7xl font-black mb-6 tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
+        className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
       >
         Meet The Team 🤝
       </motion.h2>
@@ -63,16 +74,15 @@ export default function Team() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="text-center text-gray-300 max-w-2xl mx-auto text-lg sm:text-xl mb-16"
+        className="text-center text-gray-300 max-w-2xl mx-auto text-base sm:text-lg md:text-xl mb-12 sm:mb-16"
       >
         People who turn ideas into reality—pixel by pixel, line by line.
       </motion.p>
 
       {/* Slider */}
-      <div className="max-w-lg md:max-w-3xl mx-auto relative">
-
+      <div className="max-w-full sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto relative px-2 sm:px-4">
         {/* Progress Ring */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none animate-pulse">
+        <div className="absolute -top-8 sm:-top-10 left-1/2 -translate-x-1/2 pointer-events-none animate-pulse z-10">
           <svg width="55" height="55">
             <circle
               cx="27.5"
@@ -99,51 +109,54 @@ export default function Team() {
 
         <Slider {...settings}>
           {members.map((member, index) => (
-            <Tilt
-              key={index}
-              glareEnable={true}
-              glareMaxOpacity={0.15}
-              scale={1.03}
-              transitionSpeed={1500}
-              className="rounded-3xl"
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="bg-white/10 border border-white/20 rounded-3xl p-12 text-center shadow-2xl backdrop-blur-md"
+            <div key={index} className="px-2 sm:px-4">
+              <Tilt
+                glareEnable={true}
+                glareMaxOpacity={0.15}
+                scale={1.03}
+                transitionSpeed={1500}
+                className="rounded-3xl"
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
               >
-                <h3 className="text-3xl font-bold">{member.name}</h3>
-                <p className="text-purple-400 text-lg font-medium">{member.role}</p>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 text-center shadow-2xl backdrop-blur-md mx-auto"
+                >
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">{member.name}</h3>
+                  <p className="text-purple-400 text-base sm:text-lg md:text-xl font-medium mb-4">{member.role}</p>
 
-                <p className="text-gray-300 mt-4 text-base leading-relaxed">
-                  {member.bio}
-                </p>
+                  <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6">
+                    {member.bio}
+                  </p>
 
-                {/* Social icons */}
-                <div className="flex justify-center gap-6 mt-6">
-                  <motion.a
-                    href={member.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.3 }}
-                    className="text-3xl text-gray-300 hover:text-purple-400 transition"
-                  >
-                    <FaGithub />
-                  </motion.a>
+                  {/* Social icons */}
+                  <div className="flex justify-center gap-4 sm:gap-6">
+                    <motion.a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.3 }}
+                      className="text-2xl sm:text-3xl text-gray-300 hover:text-purple-400 transition-colors"
+                    >
+                      <FaGithub />
+                    </motion.a>
 
-                  <motion.a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.3 }}
-                    className="text-3xl text-gray-300 hover:text-blue-400 transition"
-                  >
-                    <FaLinkedin />
-                  </motion.a>
-                </div>
-              </motion.div>
-            </Tilt>
+                    <motion.a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.3 }}
+                      className="text-2xl sm:text-3xl text-gray-300 hover:text-blue-400 transition-colors"
+                    >
+                      <FaLinkedin />
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </Tilt>
+            </div>
           ))}
         </Slider>
       </div>

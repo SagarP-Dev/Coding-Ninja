@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import videoBg from "../assets/1992-153555258.mp4";
 
 export default function Hero() {
-  
-  
   const scrollToContact = () => {
     const section = document.getElementById("contact");
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden text-white">
-
+    <section
+      id="home"
+      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden text-white"
+    >
       {/* Background Video */}
       <video
         src={videoBg}
@@ -21,7 +21,6 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/90"></div>
 
       {/* Content */}
@@ -41,7 +40,6 @@ export default function Hero() {
           Welcome to <span className="text-blue-400">Coding Ninja</span> ⚡
         </motion.h1>
 
-        
         <motion.p
           className="mt-4 text-base sm:text-lg md:text-xl max-w-xl sm:max-w-2xl mx-auto leading-relaxed opacity-90"
           initial={{ opacity: 0 }}
@@ -52,19 +50,17 @@ export default function Hero() {
           industry-leading full-stack development.
         </motion.p>
 
-        
         <motion.button
           onClick={scrollToContact}
           className="mt-10 px-8 sm:px-10 py-3 sm:py-4 text-lg sm:text-xl font-semibold rounded-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 shadow-[0_0_25px_rgba(0,153,255,0.6)] hover:shadow-[0_0_45px_rgba(0,153,255,1)]"
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.5, type: "spring" }}
+          transition={{ delay: 1.5, type: 'spring' }}
           whileHover={{ scale: 1.15 }}
         >
           Contact Us 🚀
         </motion.button>
 
-        
         <motion.div
           className="mt-10 text-sm opacity-70 animate-bounce hidden sm:block"
           initial={{ opacity: 0 }}
