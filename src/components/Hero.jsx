@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
 import videoBg from "../assets/1992-153555258.mp4";
 
-export default function Hero() {
-  const scrollToContact = () => {
-    const section = document.getElementById("contact");
-    section?.scrollIntoView({ behavior: "smooth" });
-  };
+const text = "Turning Ideas into Scalable Digital Reality ✨";
 
+export default function Hero() {
   return (
     <section
       id="home"
@@ -40,8 +37,9 @@ export default function Hero() {
           Welcome to <span className="text-blue-400">Coding Ninja</span> ⚡
         </motion.h1>
 
+        {/* Description */}
         <motion.p
-          className="mt-4 text-base sm:text-lg md:text-xl max-w-xl sm:max-w-2xl mx-auto leading-relaxed opacity-90"
+          className="mt-4 text-base sm:text-lg md:text-xl max-w-2xl mx-auto opacity-90"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
@@ -50,22 +48,43 @@ export default function Hero() {
           industry-leading full-stack development.
         </motion.p>
 
-        <motion.button
-          onClick={scrollToContact}
-          className="mt-10 px-8 sm:px-10 py-3 sm:py-4 text-lg sm:text-xl font-semibold rounded-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 shadow-[0_0_25px_rgba(0,153,255,0.6)] hover:shadow-[0_0_45px_rgba(0,153,255,1)]"
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.5, type: 'spring' }}
-          whileHover={{ scale: 1.15 }}
+        {/* Text */}
+        <motion.p
+          className="mt-10 text-lg sm:text-xl md:text-2xl font-semibold text-blue-300 tracking-wide"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.05,
+                delayChildren: 1.6,
+              },
+            },
+          }}
+          style={{
+            textShadow: "0 0 20px rgba(59,130,246,0.8)",
+          }}
         >
-          Contact Us 🚀
-        </motion.button>
+          {text.split("").map((char, index) => (
+            <motion.span
+              key={index}
+s
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 },
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </motion.p>
 
+        {/* Scroll */}
         <motion.div
-          className="mt-10 text-sm opacity-70 animate-bounce hidden sm:block"
+          className="mt-12 text-sm opacity-70 animate-bounce hidden sm:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 3 }}
         >
           ⬇ Scroll to explore ⬇
         </motion.div>
