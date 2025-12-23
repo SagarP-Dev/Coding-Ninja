@@ -1,165 +1,141 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Slider from "react-slick";
-import Tilt from "react-parallax-tilt";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export default function Team() {
+  const [activeMember, setActiveMember] = useState(null);
+
   const members = [
     {
       name: "Amit Kumar Mahapatra",
       role: "Full Stack Developer",
-      bio: "Full-stack developer with expertise in scalable systems, backend engineering, and modern frontend frameworks.",
+      bio: "Full-stack developer with strong backend focus and experience building scalable, production-ready systems.",
+      longBio:
+        "Amit specializes in backend engineering, database design, and building scalable, high-performance APIs. He has extensive experience designing and implementing system architectures for web applications, ensuring efficiency, reliability, and maintainability. Amit is skilled in optimizing performance, managing complex data workflows, and integrating multiple services to create robust, production-ready solutions. He is passionate about leveraging modern backend technologies and best practices to deliver scalable, secure, and efficient applications that provide seamless experiences for users.",
       github: "https://github.com/mr-amitkumar",
       linkedin: "https://www.linkedin.com/in/amit-kumar-mahapatra-7b4989274/",
     },
     {
       name: "Sagar Panigrahi",
       role: "Full Stack Developer",
-      bio: "UI/UX focused Full Stack Developer skilled in Python, MERN, Framer Motion & creative modern web experiences.",
+      bio: "Full-stack developer focused on scalable backend systems, efficient APIs, and clean, modern web interfaces.",
+      longBio:
+        "Sagar specializes in developing full-stack web applications with robust backend architecture using Python frameworks such as Django and Flask, efficient and scalable APIs, and modern, responsive frontend interfaces. He is experienced in designing end-to-end solutions, integrating databases, optimizing performance, implementing security best practices, and delivering seamless user experiences across devices. His expertise combines backend logic, server-side development, and frontend technologies to create highly functional and visually appealing applications.",
       github: "https://github.com/SagarP-Dev",
       linkedin: "https://www.linkedin.com/in/sagar-trushna-panigrahi-079b6727a/",
     },
   ];
 
-  const [progress, setProgress] = useState(0);
-  const autoplaySpeed = 3000;
+  const Card = ({ member }) => (
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className="
+        bg-[#111122]
+        border border-white/10
+        rounded-2xl
+        p-8
+        shadow-sm
+        hover:shadow-xl
+        transition-all
+        h-full
+      "
+    >
+      {/* Avatar */}
+      <div className="w-14 h-14 mb-5 rounded-full bg-white/10 
+        flex items-center justify-center text-lg font-semibold">
+        {member.name.split(" ").map(n => n[0]).join("")}
+      </div>
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((p) => (p >= 100 ? 0 : p + 2));
-    }, autoplaySpeed / 50);
+      <h3 className="text-xl font-medium mb-1">{member.name}</h3>
+      <p className="text-sm text-indigo-400 mb-4">{member.role}</p>
 
-    return () => clearInterval(interval);
-  }, []);
+      <p className="text-sm text-gray-300 leading-relaxed mb-6">
+        {member.bio}
+      </p>
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: autoplaySpeed,
-    speed: 900,
-    fade: true,
-    arrows: false,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          fade: false,
-          speed: 500,
-        }
-      }
-    ]
-  };
+      <button
+        onClick={() => setActiveMember(member)}
+        className="text-sm text-indigo-400 hover:text-indigo-300 transition"
+      >
+        View Profile →
+      </button>
+    </motion.div>
+  );
 
   return (
-    <section
-      id="team"
-      className="py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white"
-    >
+    <section id="team" className="py-24 px-4 bg-[#0b0b16] text-white">
       {/* Heading */}
       <motion.h2
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text"
+        className="text-center text-5xl md:text-6xl font-semibold mb-6"
       >
-        Meet The Team 🤝
+        Our Team
       </motion.h2>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-center text-gray-300 max-w-2xl mx-auto text-base sm:text-lg md:text-xl mb-12 sm:mb-16"
-      >
-        People who turn ideas into reality—pixel by pixel, line by line.
-      </motion.p>
+      <p className="text-center text-gray-400 max-w-2xl mx-auto mb-16">
+        A small team of developers focused on building reliable, scalable and user-friendly digital products.
+      </p>
 
-      {/* Slider */}
-      <div className="max-w-full sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto relative px-2 sm:px-4">
-        {/* Progress Ring */}
-        <div className="absolute -top-8 sm:-top-10 left-1/2 -translate-x-1/2 pointer-events-none animate-pulse z-10">
-          <svg width="55" height="55">
-            <circle
-              cx="27.5"
-              cy="27.5"
-              r="23"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="4"
-              fill="none"
-            />
-            <circle
-              cx="27.5"
-              cy="27.5"
-              r="23"
-              stroke="#8A2BE2"
-              strokeWidth="4"
-              fill="none"
-              strokeDasharray={145}
-              strokeDashoffset={145 - (145 * progress) / 100}
-              strokeLinecap="round"
-              style={{ transition: "stroke-dashoffset 0.3s" }}
-            />
-          </svg>
-        </div>
-
-        <Slider {...settings}>
-          {members.map((member, index) => (
-            <div key={index} className="px-2 sm:px-4">
-              <Tilt
-                glareEnable={true}
-                glareMaxOpacity={0.15}
-                scale={1.03}
-                transitionSpeed={1500}
-                className="rounded-3xl"
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 text-center shadow-2xl backdrop-blur-md mx-auto"
-                >
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">{member.name}</h3>
-                  <p className="text-purple-400 text-base sm:text-lg md:text-xl font-medium mb-4">{member.role}</p>
-
-                  <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6">
-                    {member.bio}
-                  </p>
-
-                  {/* Social icons */}
-                  <div className="flex justify-center gap-4 sm:gap-6">
-                    <motion.a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.3 }}
-                      className="text-2xl sm:text-3xl text-gray-300 hover:text-purple-400 transition-colors"
-                    >
-                      <FaGithub />
-                    </motion.a>
-
-                    <motion.a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.3 }}
-                      className="text-2xl sm:text-3xl text-gray-300 hover:text-blue-400 transition-colors"
-                    >
-                      <FaLinkedin />
-                    </motion.a>
-                  </div>
-                </motion.div>
-              </Tilt>
-            </div>
-          ))}
-        </Slider>
+      {/* Responsive Grid for all screens */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {members.map((member, i) => (
+          <Card key={i} member={member} />
+        ))}
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {activeMember && (
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveMember(null)}
+          >
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-[#111122] border border-white/10 rounded-2xl p-8 max-w-lg w-full"
+            >
+              <h3 className="text-2xl font-semibold mb-1">
+                {activeMember.name}
+              </h3>
+              <p className="text-indigo-400 mb-4">
+                {activeMember.role}
+              </p>
+
+              <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                {activeMember.longBio}
+              </p>
+
+              <div className="flex gap-4">
+                <a
+                  href={activeMember.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href={activeMember.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
